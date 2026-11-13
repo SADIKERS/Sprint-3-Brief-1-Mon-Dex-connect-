@@ -102,7 +102,7 @@ function updateCards() {
 
   });
 
-  displayCards(filteredCards);
+ displayCards(filteredCards, false, favorites);
 }
 
 filters.addEventListener("click", function(event) {
@@ -177,11 +177,12 @@ grid.addEventListener("click", function (event) {
       return id !== cardId;
     });
 
-    button.textContent = "❤️Favorite";
   } else {
     // Kanzidoha l favorites
     favorites.push(cardId);
-    button.textContent = "🤍 Favorited";
+
+    button.textContent = "❤️ Favorited";
+    button.classList.add("bg-red-200", "text-red-700");
   }
 
   // Kansajlo les favoris f LocalStorage

@@ -2,7 +2,7 @@
 const grid = document.querySelector("#grid");
 
 // Affichage des cartes
-export function displayCards(cards, append = false) {
+export function displayCards(cards, append = false, favorites = []) {
 
     // Ila ma bghinach nzido 3la les cartes l9dam
     if (!append) {
@@ -39,11 +39,11 @@ export function displayCards(cards, append = false) {
             <button type="button" data-add-team="${card.id}" class="btn-outline w-full min-w-0 whitespace-normal break-words px-2 py-2 text-center text-xs leading-tight sm:text-sm">
                 Ajouter à l'équipe
             </button>
-            <button
+           <button
                 type="button"
                 data-favorite="${card.id}"
-                class="rounded-lg border border-black px-3 py-2">
-             ❤️ Favorite
+                class="rounded-lg border border-black px-3 py-2 ${favorites.includes(String(card.id)) ? "bg-red-200 text-red-700" : ""}">
+                    ${favorites.includes(String(card.id)) ? "❤️ Favorited" : "🤍 Favorite"}
             </button>
         </article>
     `).join("");
