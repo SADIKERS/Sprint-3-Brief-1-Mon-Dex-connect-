@@ -147,3 +147,9 @@ grid.addEventListener("click", async function (event) {
         console.error(error);
     }
 });
+/* 3. FERMER LE DÉTAIL */
+
+// Mlli kanclikiw 3la bouton fermer, kan5ebiw panneau
+document.querySelector("#close-detail").addEventListener("click", function () {
+    document.querySelector("#detail").classList.add("hidden");
+});
