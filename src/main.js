@@ -1,5 +1,6 @@
 import { getCards, searchCards, getCardDetail } from "./services/api.js";
 import { displayCards, displayCardDetail } from "./ui.js";
+import { getFavorites, saveFavorites } from "./storage.js";
 
 let offset = 20;
 
@@ -152,4 +153,37 @@ grid.addEventListener("click", async function (event) {
 // Mlli kanclikiw 3la bouton fermer, kan5ebiw panneau
 document.querySelector("#close-detail").addEventListener("click", function () {
     document.querySelector("#detail").classList.add("hidden");
+});
+
+/* 3. FAVORITES */
+
+// Kanjibo les favoris li مخزنين
+let favorites = getFavorites();
+
+// Mlli المستخدم kayklik 3la bouton Favorite
+grid.addEventListener("click", function (event) {
+  const button = event.target.closest("button[data-favorite]");
+
+  // Ila ma kanch click 3la bouton Favorite, kan7ebso l'exécution
+  if (!button) return;
+
+  // Kanakhdo ID dyal carte
+  const cardId = button.dataset.favorite;
+
+  // Wach carte deja f favorites?
+  if (favorites.includes(cardId)) {
+    // Kan7eydoha men favorites
+    favorites = favorites.filter(function (id) {
+      return id !== cardId;
+    });
+
+    button.textContent = "❤️Favorite";
+  } else {
+    // Kanzidoha l favorites
+    favorites.push(cardId);
+    button.textContent = "🤍 Favorited";
+  }
+
+  // Kansajlo les favoris f LocalStorage
+  saveFavorites(favorites);
 });

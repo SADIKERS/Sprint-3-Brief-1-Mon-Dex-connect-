@@ -39,11 +39,16 @@ export function displayCards(cards, append = false) {
             <button type="button" data-add-team="${card.id}" class="btn-outline w-full min-w-0 whitespace-normal break-words px-2 py-2 text-center text-xs leading-tight sm:text-sm">
                 Ajouter à l'équipe
             </button>
+            <button
+                type="button"
+                data-favorite="${card.id}"
+                class="rounded-lg border border-black px-3 py-2">
+             ❤️ Favorite
+            </button>
         </article>
     `).join("");
 }
 // Affichage des détails d'une carte
-
 
 /* 2. DÉTAIL DE LA CARTE */
 
