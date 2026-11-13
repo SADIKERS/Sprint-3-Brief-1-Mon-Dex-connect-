@@ -1,30 +1,58 @@
+
 const API_URL = "https://db.ygoprodeck.com/api/v7/cardinfo.php";
 
-export async function getCards(offest = 0){
-    const url = `${API_URL}?num=20&offset=${offset}`;
+export async function getCards(offset = 0) {
+    try {
+        const url = `${API_URL}?num=20&offset=${offset}`;
 
-    const response = await fetch(url);
+        const response = await fetch(url);
 
-    if(!response.ok){
-        throw new Error("Failed to fetch cards");
+        if (!response.ok) {
+            throw new Error("Failed to fetch cards");
+        }
+
+        const result = await response.json();
+
+        return result.data.map(card => transformCard(card));
+
+    } catch (error) {
+        throw error;
     }
+}
 
-    const result = await response.json();
+export async function searchCards(name) {
+    try {
+        const url = `${API_URL}?fname=${encodeURIComponent(name)}`;
 
-    const cards = result.data.map((card) => {
-        return{
-            id:card.id,
-            name: card.name,
-            type: card.type,
-            attribute: card.attribute || "Unknown",
-            race: card.race,
-            atk: card.atk ?? null,
-            def: card.def ?? null,
-            level: card.level ?? null,
-            image: card.card_image?.[0]?.image_url || "",
-            description: card.desc
-        };
-    });
-    return cards;
-    
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Failed to search cards");
+        }
+        
+        const result = await response.json();
+
+        return result.data.map(card => transformCard(card));
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+function transformCard(card) {
+    return {
+        id: card.id,
+        name: card.name,
+        type: card.type,
+        attribute: card.attribute ?? "Unknown",
+        race: card.race,
+        level: card.level ?? 0,
+        stats: {
+            atk: card.atk ?? 0,
+            def: card.def ?? 0
+        },
+
+        image: card.card_images?.[0]?.image_url ?? "",
+        description: card.desc
+    };
 }

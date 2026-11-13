@@ -43,7 +43,7 @@
       <!-- Titre et recherche -->
       <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between lg:gap-4">
 
-        <div>
+        <div class ="pb-10">
           <h1 class="font-display text-2xl font-extrabold sm:text-3xl lg:text-4xl"> Explorer <span
               class="text-red-700">les monstres</span> </h1>
           <p class="text-sm text-muted sm:text-base">
@@ -51,28 +51,46 @@
           </p>
         </div>
 
-        <label class="flex w-full flex-col gap-1 text-sm font-bold lg:max-w-md"> Rechercher par nom
-          <input id="search" type="search" placeholder="ex. Dark Magician, Blue-Eyes..."
-            class="field w-full font-normal">
-        </label>
+
+        <form id="search-form" class="flex w-full flex-col gap-2 lg:max-w-md">
+
+          <label for="search" class="flex flex-col gap-1 text-sm font-bold">
+            Rechercher par nom
+
+            <input id="search" type="search" placeholder="ex. Dark Magician, Blue-Eyes..."
+              class="field w-full font-normal">
+          </label>
+
+          <div class="flex gap-2">
+            <button type="submit" class="btn-primary flex-1">
+              Rechercher
+            </button>
+
+            <button type="button" id="clear-search" class="btn-outline">
+              Effacer
+            </button>
+          </div>
+
+        </form>
+
 
       </div>
       <!-- Filtres par attribut -->
       <div id="filters" role="group" aria-label="Filtrer par attribut" class="flex flex-wrap gap-2">
         <button type="button" data-type="Tous"
           class="chip shrink-0 border-red-700 bg-red-700 text-white transition-transform hover:scale-110">Tous</button>
-        <button type="button" data-type="Lumière" class="chip shrink-0 transition-transform hover:scale-110">🔆
-          Lumière</button>
-        <button type="button" data-type="Ténèbres" class="chip shrink-0 transition-transform hover:scale-110">🟣
-          Ténèbres</button>
-        <button type="button" data-type="Feu" class="chip shrink-0 transition-transform hover:scale-110">🔥 Feu</button>
-        <button type="button" data-type="Eau" class="chip shrink-0 transition-transform hover:scale-110">💧 Eau</button>
-        <button type="button" data-type="Terre" class="chip shrink-0 transition-transform hover:scale-110">🌍
-          Terre</button>
-        <button type="button" data-type="Vent" class="chip shrink-0 transition-transform hover:scale-110">🌪️
-          Vent</button>
-        <button type="button" data-type="Divin" class="chip shrink-0 transition-transform hover:scale-110">🔱
-          Divin</button>
+        <button type="button" data-type="LIGHT" class="chip shrink-0 transition-transform hover:scale-110">🔆
+          LIGHT</button>
+        <button type="button" data-type="DARK" class="chip shrink-0 transition-transform hover:scale-110">🟣
+          DARK</button>
+        <button type="button" data-type="FIRE" class="chip shrink-0 transition-transform hover:scale-110">🔥 FIRE</button>
+        <button type="button" data-type="WATER" class="chip shrink-0 transition-transform hover:scale-110">💧 WATER</button>
+        <button type="button" data-type="EARTH" class="chip shrink-0 transition-transform hover:scale-110">🌍
+          	EARTH</button>
+        <button type="button" data-type="WIND" class="chip shrink-0 transition-transform hover:scale-110">🌪️
+          WIND</button>
+        <button type="button" data-type="DIVINE" class="chip shrink-0 transition-transform hover:scale-110">🔱
+        DIVINE</button>
       </div>
 
     </section>
@@ -80,10 +98,11 @@
     <!-- ===================== GRILLE, DÉTAILS ET ÉQUIPE ===================== -->
     <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-5">
       <!-- ===================== GRILLE DES MONSTRES ===================== -->
+      <div id="message" class="text-center text-sm"></div>
+
       <section id="grid" aria-label="Monstres Yu-Gi-Oh!"
         class="grid min-w-0 flex-1 grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-2 xl:grid-cols-3 max-h-[750px] overflow-y-auto content-start pr-2">
       </section>
-
       <!-- ===================== DÉTAILS ET ÉQUIPE ===================== -->
       <aside class="flex w-full min-w-0 flex-col gap-5 lg:w-[340px] xl:w-[420px] lg:shrink-0">
         <!-- ===================== DÉTAIL DU MONSTRE ===================== -->
@@ -211,7 +230,11 @@
       </aside>
 
     </div>
-
+    <div class="flex justify-center">
+      <button id="load-more" type="button" class="btn-primary ml-65">
+        Charger plus
+      </button>
+    </div>
     <!-- ===================== FORMULAIRE DE CRÉATION ===================== -->
     <section id="create" aria-labelledby="create-title"
       class=" rounded-2xl border-2 border-[#30251B] bg-[#FFFDF7] p-4 shadow-lg sm:p-6 lg:p-8">
@@ -238,7 +261,7 @@
           <input name="id" type="text" placeholder="#010" class="field w-full min-w-0 font-normal">
           <span class="error-message text-sm font-normal text-red-700"></span>
         </label>
-        
+
         <!-- Nom -->
         <label class="flex min-w-0 flex-col gap-2 text-sm font-bold text-[#30251B]">
           Nom du monstre
@@ -328,10 +351,7 @@
     Projet de fans réalisé dans le cadre d'une formation.
   </footer>
 
-  <!-- data.js (à créer) doit être chargé AVANT script.js -->
-  <script src="./src/data.js"></script>
-  <script src="./src/script.js"></script>
-  <script src="./src/services/ui.js"></script>
+  <script type="module" src="./src/main.js"></script>
 </body>
 
 </html>
