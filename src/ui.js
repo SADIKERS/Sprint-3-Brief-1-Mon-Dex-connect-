@@ -42,3 +42,39 @@ export function displayCards(cards, append = false) {
         </article>
     `).join("");
 }
+// Affichage des détails d'une carte
+
+
+/* 2. DÉTAIL DE LA CARTE */
+
+// Affichage des détails d'une carte
+export function displayCardDetail(card) {
+
+    document.querySelector("#detail").classList.remove("hidden");
+
+    document.querySelector("#detail-title").textContent = `${card.id} - Détail`;
+
+    document.querySelector("#detail-image").src = card.image;
+    document.querySelector("#detail-image").alt = card.name;
+
+    document.querySelector("#detail-name").textContent = card.name;
+    document.querySelector("#detail-type").textContent = card.type;
+
+    document.querySelector("#detail-level").textContent = card.level;
+    document.querySelector("#detail-level-value").textContent = card.level;
+
+    document.querySelector("#detail-description").textContent = card.description;
+
+    document.querySelector("#detail-atk").textContent = card.stats.atk;
+    document.querySelector("#detail-def").textContent = card.stats.def;
+
+    // Calcul des barres des statistiques
+    document.querySelector("#detail-atk-bar").style.width =
+        `${(card.stats.atk / 4000) * 100}%`;
+
+    document.querySelector("#detail-def-bar").style.width =
+        `${(card.stats.def / 4000) * 100}%`;
+
+    document.querySelector("#detail-level-bar").style.width =
+        `${(card.level / 10) * 100}%`;
+}

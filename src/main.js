@@ -1,6 +1,5 @@
-
-import { getCards, searchCards } from "./services/api.js";
-import { displayCards } from "./ui.js";
+import { getCards, searchCards, getCardDetail } from "./services/api.js";
+import { displayCards, displayCardDetail } from "./ui.js";
 
 let offset = 20;
 
@@ -53,6 +52,7 @@ searchForm.addEventListener("submit", async function (event) {
 
   try {
     message.textContent = "Recherche en cours...";
+    grid.innerHTML = "";
 
     loadMoreButton.disabled = true;
 
@@ -113,4 +113,37 @@ filters.addEventListener("click", function(event) {
     selectedAttribute = button.dataset.type;
 
     updateCards();
+});
+
+/* 2. DÉTAIL DE LA CARTE */
+
+const grid = document.querySelector("#grid");
+
+// Mlli kanclikiw 3la carte, kanjibo les détails dyalha
+grid.addEventListener("click", async function (event) {
+
+    const card = event.target.closest("article[data-id]");
+
+    // Ila ma kanch click 3la carte, kan7ebso l'exécution
+    if (!card) return;
+
+    // Ila kan click 3la bouton, ma kan7ellouch les détails
+    if (event.target.closest("button")) return;
+
+    // Kanakhdo ID dyal carte
+    const cardId = card.dataset.id;
+
+    try {
+        message.textContent = "Loading card details...";
+
+        const selectedCard = await getCardDetail(cardId);
+
+        displayCardDetail(selectedCard);
+
+        message.textContent = "";
+
+    } catch (error) {
+        message.textContent = "Error loading card details.";
+        console.error(error);
+    }
 });
