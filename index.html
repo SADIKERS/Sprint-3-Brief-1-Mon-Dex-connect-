@@ -80,10 +80,11 @@
     <!-- ===================== GRILLE, DÉTAILS ET ÉQUIPE ===================== -->
     <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-5">
       <!-- ===================== GRILLE DES MONSTRES ===================== -->
+      <div id="message" class="text-center text-sm"></div>
+
       <section id="grid" aria-label="Monstres Yu-Gi-Oh!"
         class="grid min-w-0 flex-1 grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-2 xl:grid-cols-3 max-h-[750px] overflow-y-auto content-start pr-2">
       </section>
-
       <!-- ===================== DÉTAILS ET ÉQUIPE ===================== -->
       <aside class="flex w-full min-w-0 flex-col gap-5 lg:w-[340px] xl:w-[420px] lg:shrink-0">
         <!-- ===================== DÉTAIL DU MONSTRE ===================== -->
@@ -211,7 +212,11 @@
       </aside>
 
     </div>
-
+    <div class="flex justify-center">
+     <button id="load-more" type="button" class="btn-primary ml-65">
+        Charger plus
+      </button>
+    </div>
     <!-- ===================== FORMULAIRE DE CRÉATION ===================== -->
     <section id="create" aria-labelledby="create-title"
       class=" rounded-2xl border-2 border-[#30251B] bg-[#FFFDF7] p-4 shadow-lg sm:p-6 lg:p-8">
@@ -238,7 +243,7 @@
           <input name="id" type="text" placeholder="#010" class="field w-full min-w-0 font-normal">
           <span class="error-message text-sm font-normal text-red-700"></span>
         </label>
-        
+
         <!-- Nom -->
         <label class="flex min-w-0 flex-col gap-2 text-sm font-bold text-[#30251B]">
           Nom du monstre
@@ -328,10 +333,7 @@
     Projet de fans réalisé dans le cadre d'une formation.
   </footer>
 
-  <!-- data.js (à créer) doit être chargé AVANT script.js -->
-  <script src="./src/data.js"></script>
-  <script src="./src/script.js"></script>
-  <script src="./src/services/ui.js"></script>
+  <script type="module" src="./src/main.js"></script>
 </body>
 
 </html>

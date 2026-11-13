@@ -2,7 +2,7 @@
 import { getCards } from "./services/api.js";
 import { displayCards } from "./ui.js";
 
-let offset = 0;
+let offset = 20;
 
 const loadMoreButton = document.querySelector("#load-more");
 const message = document.querySelector("#message");

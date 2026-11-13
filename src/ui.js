@@ -1,30 +1,42 @@
+
 const grid = document.querySelector("#grid");
 
-export function displayCards(cards, append = false){
-    if(!append){
-        grid.innerHTml = "";
+// Affichage des cartes
+export function displayCards(cards, append = false) {
+
+    // Ila ma bghinach nzido 3la les cartes l9dam
+    if (!append) {
+        grid.innerHTML = "";
     }
 
-    cards.forEach ((card) => {
-        const article = document.createElement("article");
+    // Affichage dyal les cartes
+    grid.innerHTML += cards.map(card => `
+        <article data-id="${card.id}"
+            class="flex flex-col gap-2 rounded-card border-2 border-black bg-yellow-500/50 p-3 shadow-xl">
 
-        article.className = "rounded-xl bg-white p-3 shadow-md border border-gray-200";
+            <img
+                src="${card.image}"
+                alt="${card.name}"
+                class="w-full rounded-xl object-cover"
+            >
 
-        const image = document.createElement("img");
-        image.src = card.image;
-        image.alt = card.name;
-        image.className = "w-full rounded-lg";
+            <h3 class="font-bold">
+                ${card.name}
+            </h3>
 
-        const type = document.createElement("p");
-        type.textContent = card.type;
-        type.className = "text-sm text-gray-500";
+            <p class="text-sm">
+                ${card.attribute || "Unknown"}
+            </p>
 
-        const stats = document.createElement("P");
-        stats.textContent = `ATK: ${card.atk ?? "—"} | DEF: ${card.def ?? "—"}`;
-        stats.className = "text-sm mt-2";
+            <p class="text-sm">
+                ${card.type}
+            </p>
 
-        article.append(image, title, type, stats);
+            <div class="flex justify-between text-sm font-bold">
+                <span>ATK: ${card.stats.atk}</span>
+                <span>DEF: ${card.stats.def}</span>
+            </div>
 
-        grid.append(article);
-    });
+        </article>
+    `).join("");
 }

@@ -388,7 +388,7 @@ const teamcount = document.querySelector("#team-count");
 const headerteamcount = document.querySelector("#count-team");
 
 // Mlli l'utilisateur kayklik 3la bouton ajouter, kantraitiw l'événement
-grid.parentElement.addEventListener("click", function (event) {
+grid.addEventListener("click", function (event) {
   const addbutton = event.target.closest("button[data-add-team]");
   // Ila ma kanch click 3la bouton ajouter, kan7ebso l'exécution
   if (!addbutton) return;
