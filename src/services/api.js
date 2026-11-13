@@ -20,6 +20,25 @@ export async function getCards(offset = 0) {
     }
 }
 
+export async function searchCards(name) {
+    try {
+        const url = `${API_URL}?fname=${encodeURIComponent(name)}`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Failed to search cards");
+        }
+        
+        const result = await response.json();
+
+        return result.data.map(card => transformCard(card));
+
+    } catch (error) {
+        throw error;
+    }
+}
+
 function transformCard(card) {
     return {
         id: card.id,

@@ -1,11 +1,12 @@
 
-import { getCards } from "./services/api.js";
+import { getCards, searchCards } from "./services/api.js";
 import { displayCards } from "./ui.js";
 
 let offset = 20;
 
 const loadMoreButton = document.querySelector("#load-more");
 const message = document.querySelector("#message");
+
 
 async function loadCards() {
   try {
@@ -15,7 +16,10 @@ async function loadCards() {
 
     const cards = await getCards(offset);
 
-    displayCards(cards, offset > 0);
+    allCards = allCards.concat(cards);
+    currentCards = allCards;
+
+    updateCards();
 
     offset += cards.length;
 
@@ -33,3 +37,80 @@ async function loadCards() {
 loadMoreButton.addEventListener("click", loadCards);
 
 loadCards();
+
+
+// Recherche des cartes
+const searchForm = document.querySelector("#search-form");
+const searchInput = document.querySelector("#search");
+const clearSearchButton = document.querySelector("#clear-search");
+
+searchForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  const name = searchInput.value.trim();
+
+  if (name === "") return;
+
+  try {
+    message.textContent = "Recherche en cours...";
+
+    loadMoreButton.disabled = true;
+
+    const cards = await searchCards(name);
+
+    currentCards = cards;
+    updateCards();
+
+    if (cards.length === 0) {
+      message.textContent = "Aucune carte trouvée.";
+    } else {
+      message.textContent = "";
+    }
+
+  } catch (error) {
+    message.textContent = "Erreur pendant la recherche.";
+    console.error(error);
+  }
+});
+
+clearSearchButton.addEventListener("click", function() {
+
+    searchInput.value = "";
+
+    currentCards = allCards;
+    selectedAttribute = "Tous";
+
+    offset = allCards.length;
+
+    updateCards();
+});
+
+
+//filtrer des cartes 
+let allCards = [];
+let currentCards = [];
+let selectedAttribute = "Tous";
+
+const filters = document.querySelector("#filters");
+function updateCards() {
+
+  const filteredCards = currentCards.filter(function (card) {
+
+    return selectedAttribute === "Tous" ||
+      card.attribute === selectedAttribute;
+
+  });
+
+  displayCards(filteredCards);
+}
+
+filters.addEventListener("click", function(event) {
+
+    const button = event.target.closest("button[data-type]");
+
+    if (!button) return;
+
+    selectedAttribute = button.dataset.type;
+
+    updateCards();
+});
