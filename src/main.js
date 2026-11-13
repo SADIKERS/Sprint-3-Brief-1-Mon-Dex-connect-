@@ -188,3 +188,80 @@ grid.addEventListener("click", function (event) {
   // Kansajlo les favoris f LocalStorage
   saveFavorites(favorites);
 });
+/* 4. MON ÉQUIPE */
+
+// Had array katjme3 les monstres li khtar l'utilisateur
+const myTeam = [];
+
+// Kanjibo les emplacements w les compteurs dyal l'équipe
+const teamslots = document.querySelector("#team-slots");
+const teamcount = document.querySelector("#team-count");
+const headerteamcount = document.querySelector("#count-team");
+
+// Mlli l'utilisateur kayklik 3la bouton ajouter, kantraitiw l'événement
+grid.addEventListener("click", async function (event) {
+  const addbutton = event.target.closest("button[data-add-team]");
+
+  // Ila ma kanch click 3la bouton ajouter, kan7ebso l'exécution
+  if (!addbutton) return;
+
+  // Kanakhdo l'ID dyal monster li bgha l'utilisateur yzid
+  const creatureId = addbutton.dataset.addTeam;
+
+  // Ila l'équipe 3amra b 6 monstres, ma kanzido ta monster akhor
+  if (myTeam.length >= 6) {
+    alert("Votre équipe est complète !");
+    return;
+  }
+
+  // Ila monster deja kayn f'équipe, ma kanzidouhch mra khra
+  if (myTeam.some(function (creature) {
+    return creature.id === Number(creatureId);
+  })) {
+    alert("Ce monstre est déjà dans votre équipe !");
+    return;
+  }
+
+  try {
+    // Kan9elbo 3la les informations dyal monster f API
+    const selectedCreature = await getCardDetail(creatureId);
+
+    // Kanzido monster l'équipe w kan3awdo n'affichiwha
+    myTeam.push(selectedCreature);
+    displayTeam();
+
+  } catch (error) {
+    console.error(error);
+    alert("Impossible d'ajouter cette carte.");
+  }
+});
+
+// Had function kat'affichi l'équipe w kat7edded les compteurs
+function displayTeam() {
+  // Kan7eddto 3adad les monstres f les deux compteurs
+  teamcount.textContent = `${myTeam.length}/6`;
+  headerteamcount.textContent = myTeam.length;
+
+  // Kancréyiw emplacement dyal kol monster f'équipe
+  teamslots.innerHTML = myTeam.map(function (creature) {
+    return `
+      <div class="overflow-hidden rounded-lg border border-amber-600">
+        <img
+          src="${creature.image}"
+          alt="${creature.name}"
+          title="${creature.name}"
+          class="aspect-[3/4] w-full object-cover"
+        >
+      </div>
+    `;
+  }).join("");
+
+  // Kanzido emplacements khawyin 7ta ywliw 6 emplacements
+  for (let i = myTeam.length; i < 6; i++) {
+    teamslots.innerHTML += `
+      <div class="flex aspect-[3/4] items-center justify-center rounded-lg border border-dashed border-gray-300 text-xl text-gray-500">
+        +
+      </div>
+    `;
+  }
+}
