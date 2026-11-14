@@ -56,3 +56,21 @@ function transformCard(card) {
         description: card.desc
     };
 }
+ 
+export async function getCardDetail(id) {
+    try {
+        const url = `${API_URL}?id=${id}`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch card details");
+        }
+
+        const result = await response.json();
+
+        return transformCard(result.data[0]);
+
+    } catch (error) {
+        throw error;
+    }
+}
