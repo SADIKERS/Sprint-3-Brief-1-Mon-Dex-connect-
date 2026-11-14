@@ -1,96 +1,100 @@
-# Mon Dex — Yu-Gi-Oh!
+# 🃏 Mon Dex Connecté
 
-**Sprint 2 — Brief 1**
+**Mon Dex Connecté** est une application web qui permet de découvrir, rechercher et consulter des cartes Yu-Gi-Oh! grâce à une API externe.
 
-Mon Dex est une application web interactive dédiée à l'univers de **Yu-Gi-Oh!**. Le projet utilise HTML, Tailwind CSS et JavaScript pour afficher, rechercher, filtrer et gérer une collection de monstres.
+Le projet a été réalisé dans le cadre du Sprint 3 – Brief 1 chez YouCode. Il met en pratique JavaScript, la manipulation du DOM, les requêtes API avec Fetch et la gestion des données dans le navigateur.
 
-## Démo
+## 🌐 Démo en ligne
 
-- **Lien GitHub Pages :** https://sadikers.github.io/Sprint-2-Brief-1-Mon-Dex/
+👉 **[Voir Mon Dex Connecté sur GitHub Pages](https://sadikers.github.io/Sprint-3-Brief-1-Mon-Dex-connect-/)**
 
-## Technologies utilisées
+## ✨ Fonctionnalités
+
+- **Affichage des cartes :** récupérer et afficher les cartes depuis l'API Yu-Gi-Oh!.
+- **Chargement progressif :** afficher les cartes par lots de 20 grâce au bouton « Load More ».
+- **Recherche :** rechercher une carte par son nom.
+- **Filtrage :** filtrer les cartes selon leur attribut.
+- **Détails :** consulter les informations détaillées d'une carte en cliquant dessus.
+- **Favoris :** ajouter ou retirer des cartes de ses favoris.
+- **Persistance des favoris :** conserver les favoris grâce au LocalStorage.
+- **Mon équipe :** composer une équipe avec un maximum de 6 cartes.
+
+## 🛠️ Technologies utilisées
 
 - HTML5
 - Tailwind CSS
-- JavaScript
-- Git et GitHub
+- JavaScript (ES6+)
+- Fetch API
+- Yu-Gi-Oh! API
+- LocalStorage
+- Git & GitHub
 
-## Fonctionnalités réalisées
+## 🔌 API utilisée
 
-### 1. Affichage des monstres
-- Affichage dynamique des monstres à partir du tableau `creatures` dans `data.js`.
-- Création des cartes avec JavaScript.
-- Affichage des informations principales des monstres.
+Les données des cartes proviennent de l'API **YGOPRODeck**.
 
-### 2. Détails d'un monstre
-- Affichage des informations du monstre sélectionné.
-- Présentation de son image, de sa description et de ses statistiques.
+Documentation : https://ygoprodeck.com/api-guide/
 
-### 3. Recherche et filtres
-- Recherche des monstres par nom.
-- Filtrage des monstres par attribut.
-- Combinaison de la recherche et des filtres.
+Cette API permet de récupérer les cartes, leurs images, leurs attributs, leurs types et leurs statistiques.
 
-### 4. Création d'un monstre
-- Formulaire permettant d'ajouter un nouveau monstre.
-- Validation des champs avec des expressions régulières.
-- Vérification du format et de l'unicité de l'identifiant.
-- Vérification du nom, de l'attribut, du niveau, des statistiques, de l'image et de la description.
-- Affichage des messages d'erreur et indication visuelle des champs valides ou invalides.
-- Ajout du monstre à la collection et actualisation de l'affichage après validation.
+## 📁 Structure du projet
 
-### 5. Mon équipe
-- Ajout des monstres à une équipe.
-- Limite de six monstres.
-- Prévention des doublons.
-
-## Installation et lancement
-
-Prérequis : [Node.js](https://nodejs.org) version 18 ou supérieure.
-
-```bash
-npm install
-npm run dev
+```text
+Mon-Dex-Connecte/
+│
+├── index.html
+│
+├── src/
+│   ├── services/
+│   │   └── api.js
+│   │
+│   ├── storage.js
+│   ├── ui.js
+│   └── main.js
+│
+├── dist/
+│   └── output.css
+│
+├── images/
+│
+└── README.md
 ```
 
-La commande `npm run dev` surveille les fichiers et régénère le CSS lorsque des modifications sont effectuées.
+## 🚀 Installation et lancement
 
-Ouvrez ensuite `index.html` dans votre navigateur, par exemple avec l'extension Live Server.
-
-Avant de déployer le projet sur GitHub Pages :
+1. Cloner le repository :
 
 ```bash
-npm run build
+git clone https://github.com/SADIKERS/Sprint-3-Brief-1-Mon-Dex-connect-.git
 ```
 
-Pensez à inclure `dist/output.css` dans vos commits, car GitHub Pages ne génère pas automatiquement le CSS de Tailwind.
+2. Accéder au dossier du projet :
 
-## Structure du projet
+```bash
+cd Sprint-3-Brief-1-Mon-Dex-connect-
+```
 
-| Fichier | Rôle |
-| --- | --- |
-| `index.html` | Structure HTML et interface de Mon Dex |
-| `tailwind.config.js` | Configuration du thème Tailwind CSS |
-| `src/input.css` | Fichier source CSS |
-| `dist/output.css` | CSS généré par Tailwind CSS |
-| `data.js` | Tableau `creatures` contenant les données des monstres |
-| `script.js` | JavaScript : affichage, recherche, filtres, validation et gestion de l'équipe |
-| `design/` | Maquettes du projet |
+3. Ouvrir le fichier `index.html` dans un navigateur ou utiliser l'extension **Live Server** de VS Code.
 
-## Tests des expressions régulières
+## 🎯 Objectifs pédagogiques
 
-Les expressions régulières utilisées pour valider les champs du formulaire doivent être testées dans la console du navigateur.
+Ce projet m'a permis de pratiquer :
 
-Pour chaque expression régulière, ajoutez au moins :
-- Deux valeurs valides.
-- Deux valeurs invalides.
+- La communication avec une API REST à l'aide de Fetch.
+- Les fonctions asynchrones `async` et `await`.
+- La gestion des erreurs avec `try...catch`.
+- La manipulation du DOM avec JavaScript.
+- L'organisation du code en modules JavaScript.
+- La gestion des événements.
+- La sauvegarde des données avec LocalStorage.
+- L'utilisation de Git et GitHub.
 
-Les résultats des tests sont à compléter ici.
+## 👨‍💻 Auteur
 
-## Bonus
+**Abdelilah Sadik**
 
-Les fonctionnalités bonus seront ajoutées et documentées lorsqu'elles seront réalisées.
+- GitHub : [@SADIKERS](https://github.com/SADIKERS)
 
-## Auteur
+---
 
-Projet réalisé individuellement dans le cadre du Sprint 2 de YouCode.
+*Projet réalisé dans le cadre de la formation YouCode – Sprint 3, Brief 1.*
