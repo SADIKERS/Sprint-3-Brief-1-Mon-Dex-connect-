@@ -48,7 +48,7 @@ export function displayCards(cards, append = false, favorites = []) {
         </article>
     `).join("");
 }
-// Affichage des détails d'une carte
+
 
 /* 2. DÉTAIL DE LA CARTE */
 
