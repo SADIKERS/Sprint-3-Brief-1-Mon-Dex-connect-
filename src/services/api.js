@@ -56,7 +56,6 @@ function transformCard(card) {
         description: card.desc
     };
 }
- 
 export async function getCardDetail(id) {
     try {
         const url = `${API_URL}?id=${id}`;

@@ -74,8 +74,7 @@ export function displayCardDetail(card) {
     document.querySelector("#detail-def").textContent = card.stats.def;
 
     // Calcul des barres des statistiques
-    document.querySelector("#detail-atk-bar").style.width =
-        `${(card.stats.atk / 4000) * 100}%`;
+    document.querySelector("#detail-atk-bar").style.width = `${(card.stats.atk / 4000) * 100}%`;
 
     document.querySelector("#detail-def-bar").style.width =
         `${(card.stats.def / 4000) * 100}%`;

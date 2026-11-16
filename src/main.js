@@ -33,9 +33,11 @@ async function loadCards() {
     loadMoreButton.disabled = false;
   }
 }
-
-loadMoreButton.addEventListener("click", loadCards);
-
+// kinafdo function loadcards 3wtani ladrna click 3la button 
+loadMoreButton.addEventListener("click", function () {
+  loadCards();
+});
+//kin3ayto 3la function parce que bach tba3 lina awal 20 card 
 loadCards();
 
 
@@ -74,16 +76,16 @@ searchForm.addEventListener("submit", async function (event) {
   }
 });
 
-clearSearchButton.addEventListener("click", function() {
+clearSearchButton.addEventListener("click", function () {
 
-    searchInput.value = "";
+  searchInput.value = "";
 
-    currentCards = allCards;
-    selectedAttribute = "Tous";
+  currentCards = allCards;
+  selectedAttribute = "Tous";
 
-    offset = allCards.length;
+  offset = allCards.length;
 
-    updateCards();
+  updateCards();
 });
 
 
@@ -102,18 +104,18 @@ function updateCards() {
 
   });
 
- displayCards(filteredCards, false, favorites);
+  displayCards(filteredCards, false, favorites);
 }
 
-filters.addEventListener("click", function(event) {
+filters.addEventListener("click", function (event) {
 
-    const button = event.target.closest("button[data-type]");
+  const button = event.target.closest("button[data-type]");
 
-    if (!button) return;
+  if (!button) return;
 
-    selectedAttribute = button.dataset.type;
+  selectedAttribute = button.dataset.type;
 
-    updateCards();
+  updateCards();
 });
 
 /* 2. DÉTAIL DE LA CARTE */
@@ -123,44 +125,45 @@ const grid = document.querySelector("#grid");
 // Mlli kanclikiw 3la carte, kanjibo les détails dyalha
 grid.addEventListener("click", async function (event) {
 
-    const card = event.target.closest("article[data-id]");
+  const card = event.target.closest("article[data-id]");
 
-    // Ila ma kanch click 3la carte, kan7ebso l'exécution
-    if (!card) return;
+  // Ila ma kanch click 3la carte, kan7ebso l'exécution
+  if (!card) return;
 
-    // Ila kan click 3la bouton, ma kan7ellouch les détails
-    if (event.target.closest("button")) return;
+  // Ila kan click 3la bouton, ma kan7ellouch les détails
+  if (event.target.closest("button")) return;
 
-    // Kanakhdo ID dyal carte
-    const cardId = card.dataset.id;
+  // Kanakhdo ID dyal carte
+  const cardId = card.dataset.id;
 
-    try {
-        message.textContent = "Loading card details...";
+  try {
+    message.textContent = "Loading card details...";
 
-        const selectedCard = await getCardDetail(cardId);
+    const selectedCard = await getCardDetail(cardId);
 
-        displayCardDetail(selectedCard);
+    displayCardDetail(selectedCard);
 
-        message.textContent = "";
+    message.textContent = "";
 
-    } catch (error) {
-        message.textContent = "Error loading card details.";
-        console.error(error);
-    }
+  } catch (error) {
+    message.textContent = "Error loading card details.";
+    console.error(error);
+  }
 });
+
 /* 3. FERMER LE DÉTAIL */
 
 // Mlli kanclikiw 3la bouton fermer, kan5ebiw panneau
 document.querySelector("#close-detail").addEventListener("click", function () {
-    document.querySelector("#detail").classList.add("hidden");
+  document.querySelector("#detail").classList.add("hidden");
 });
 
 /* 3. FAVORITES */
 
-// Kanjibo les favoris li مخزنين
+// Kanjibo les favoris li mkhaznin
 let favorites = getFavorites();
 
-// Mlli المستخدم kayklik 3la bouton Favorite
+// Mlli l user kayklik 3la bouton Favorite
 grid.addEventListener("click", function (event) {
   const button = event.target.closest("button[data-favorite]");
 
@@ -176,6 +179,8 @@ grid.addEventListener("click", function (event) {
     favorites = favorites.filter(function (id) {
       return id !== cardId;
     });
+    button.textContent = "🤍 Favorite";
+    button.classList.remove("bg-red-200", "text-red-700");
 
   } else {
     // Kanzidoha l favorites
@@ -188,6 +193,7 @@ grid.addEventListener("click", function (event) {
   // Kansajlo les favoris f LocalStorage
   saveFavorites(favorites);
 });
+
 /* 4. MON ÉQUIPE */
 
 // Had array katjme3 les monstres li khtar l'utilisateur
